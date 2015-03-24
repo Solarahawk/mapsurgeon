@@ -96,11 +96,11 @@ map_root = map_tree.getroot()
 print "Loading Remap Schema: " + INPUT_PATH + args.inputschema
 
 # Load map schema table from CSV into a pandas DataFrame (powerful associative table)
-map_schema = pandas.read_csv(INPUT_PATH + args.inputschema, index_col='key')
+map_schema = pandas.read_csv(INPUT_PATH + args.inputschema)
 map_schema.sort_index(inplace=True)
 
 # Load gate network schema file, if provided
-if args.usegateschema == 1:
+if int(args.usegateschema) == 1:
     print "Gate Schema has been provided. It will direct the locations of all new gates: " + INPUT_PATH + args.inputgates
     gates_default = False   # flag to indicate whether default gate attributes, instead of the gate schema
     gate_schema_tree = ET.parse(INPUT_PATH + args.inputgates)

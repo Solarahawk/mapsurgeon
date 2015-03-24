@@ -37,7 +37,7 @@ readtext_descr = pd.read_csv(INPUT_PATH + args.inputdescr, header=1)
 
 print "Loading the Remap Schema"
 # Load map schema table from CSV into a pandas DataFrame
-map_schema = pd.read_csv(INPUT_PATH + args.inputschema, index_col='key')
+map_schema = pd.read_csv(INPUT_PATH + args.inputschema)
 map_schema.sort_index(inplace=True)
 
 names_root = ET.Element('language')

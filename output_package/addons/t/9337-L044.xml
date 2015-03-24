@@ -189,8 +189,8 @@
         <t id="1020918">Cloudbase South West</t>
         <t id="1020919">Ore Belt</t>
         <t id="1020920">Cloudbase South East</t>
-        <t id="1021002">Terran A</t>
-        <t id="1021003">Terran B</t>
+        <t id="1021002">Flaming Dawn</t>
+        <t id="1021003">Evaporated Skies</t>
         <t id="1021004">Megnir</t>
         <t id="1021005">De Vries</t>
         <t id="1021006">Interworlds</t>
@@ -208,8 +208,8 @@
         <t id="1021019">Green Market</t>
         <t id="1021020">Open Space</t>
         <t id="1021021">Queen's City</t>
-        <t id="1021102">Terran D</t>
-        <t id="1021103">Terran C</t>
+        <t id="1021102">Purple Fog</t>
+        <t id="1021103">The Twins</t>
         <t id="1021104">Xenon Sector 138</t>
         <t id="1021105">Unexpected Gift</t>
         <t id="1021106">Mists of Elysium</t>
@@ -297,7 +297,7 @@
         <t id="1021509">Senator's Badlands</t>
         <t id="1021510">The Giant</t>
         <t id="1021511">Dreamer's Victory</t>
-        <t id="1021512">Uranus 2</t>
+        <t id="1021512">Dual Eclipse</t>
         <t id="1021513">Xenon Sector 7</t>
         <t id="1021514">Xenon Sector 9</t>
         <t id="1021516">Distant Coast</t>
@@ -353,8 +353,8 @@
         <t id="1021812">Mines of Fortune</t>
         <t id="1021813">Xenon Sector 598</t>
         <t id="1021814">Atreus' Clouds</t>
-        <t id="1021815">Saturn 2</t>
-        <t id="1021816">Saturn 3</t>
+        <t id="1021815">Three Moons</t>
+        <t id="1021816">City in Space</t>
         <t id="1021817">Blue Profit</t>
         <t id="1021818">Sanctity of Corruption</t>
         <t id="1021819">Company Strength</t>
@@ -368,8 +368,8 @@
         <t id="1021912">Fields of Nividium</t>
         <t id="1021913">Xenon Sector 627</t>
         <t id="1021914">Far Point</t>
-        <t id="1021915">Jupiter 2</t>
-        <t id="1021916">Jupiter 3</t>
+        <t id="1021915">Thor's Might</t>
+        <t id="1021916">Accretion Disc</t>
         <t id="1021917">Ceo's Sprite</t>
         <t id="1021918">Eighteen Billion</t>
         <t id="1021919">Y Beta</t>
@@ -379,12 +379,11 @@
         <t id="1022012">Xenon Sector 695</t>
         <t id="1022013">Xenon Core 023</t>
         <t id="1022014">Argon Sector M148</t>
-        <t id="1022015">Titan</t>
-        <t id="1022016">Uranus 3</t>
+        <t id="1022015">Tyrianis Prime</t>
+        <t id="1022016">Alliance's Edge</t>
         <t id="1022017">Company Pride</t>
         <t id="1022018">Ianamus Zura</t>
         <t id="1022019">Y Alpha</t>
-        <t id="1020000">Unknown Sector</t>
     </page>
     <page descr="Sector descriptions for galaxy map" id="350019" title="Sector Descriptions WIP" voice="no">
         <t id="1030101">Kho's Vengeance</t>
@@ -526,8 +525,8 @@
         <t id="1030918">Cloudbase South West</t>
         <t id="1030919">Ore Belt</t>
         <t id="1030920">Cloudbase South East</t>
-        <t id="1031002">Terran A</t>
-        <t id="1031003">Terran B</t>
+        <t id="1031002">Flaming Dawn</t>
+        <t id="1031003">Evaporated Skies</t>
         <t id="1031004">Megnir</t>
         <t id="1031005">De Vries</t>
         <t id="1031006">Interworlds</t>
@@ -545,8 +544,8 @@
         <t id="1031019">Green Market</t>
         <t id="1031020">Open Space</t>
         <t id="1031021">Queen's City</t>
-        <t id="1031102">Terran D</t>
-        <t id="1031103">Terran C</t>
+        <t id="1031102">Purple Fog</t>
+        <t id="1031103">The Twins</t>
         <t id="1031104">Xenon Sector 138</t>
         <t id="1031105">Unexpected Gift</t>
         <t id="1031106">Mists of Elysium</t>
@@ -634,7 +633,7 @@
         <t id="1031509">Senator's Badlands</t>
         <t id="1031510">The Giant</t>
         <t id="1031511">Dreamer's Victory</t>
-        <t id="1031512">Uranus 2</t>
+        <t id="1031512">Dual Eclipse</t>
         <t id="1031513">Xenon Sector 7</t>
         <t id="1031514">Xenon Sector 9</t>
         <t id="1031516">Distant Coast</t>
@@ -690,8 +689,8 @@
         <t id="1031812">Mines of Fortune</t>
         <t id="1031813">Xenon Sector 598</t>
         <t id="1031814">Atreus' Clouds</t>
-        <t id="1031815">Saturn 2</t>
-        <t id="1031816">Saturn 3</t>
+        <t id="1031815">Three Moons</t>
+        <t id="1031816">City in Space</t>
         <t id="1031817">Blue Profit</t>
         <t id="1031818">Sanctity of Corruption</t>
         <t id="1031819">Company Strength</t>
@@ -705,8 +704,8 @@
         <t id="1031912">Fields of Nividium</t>
         <t id="1031913">Xenon Sector 627</t>
         <t id="1031914">Far Point</t>
-        <t id="1031915">Jupiter 2</t>
-        <t id="1031916">Jupiter 3</t>
+        <t id="1031915">Thor's Might</t>
+        <t id="1031916">Accretion Disc</t>
         <t id="1031917">Ceo's Sprite</t>
         <t id="1031918">Eighteen Billion</t>
         <t id="1031919">Y Beta</t>
@@ -716,8 +715,8 @@
         <t id="1032012">Xenon Sector 695</t>
         <t id="1032013">Xenon Core 023</t>
         <t id="1032014">Argon Sector M148</t>
-        <t id="1032015">Titan</t>
-        <t id="1032016">Uranus 3</t>
+        <t id="1032015">Tyrianis Prime</t>
+        <t id="1032016">Alliance's Edge</t>
         <t id="1032017">Company Pride</t>
         <t id="1032018">Ianamus Zura</t>
         <t id="1032019">Y Alpha</t>

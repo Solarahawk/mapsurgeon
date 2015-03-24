@@ -5,7 +5,7 @@
   
 <documentation>
     <author name="Ivan Vuk" alias="vukica" contact="egosoft forums" />
-    <content name="LU remap" description="take a guess" />
+    <content name="LU remap" description="This MD cue loads the replacement sector names and descriptions for the new map." />
     <version number="0.1" date="9/06/14" status="alpha" />
 </documentation>
 
