@@ -204,7 +204,7 @@
         <t id="1021014">Tharka's Sun</t>
         <t id="1021015">Vantera</t>
         <t id="1021016">Aurora</t>
-        <t id="1021018">Vestibule of Creation</t>
+        <t id="1021018">Prophecy Fulfilled</t>
         <t id="1021019">Green Market</t>
         <t id="1021020">Open Space</t>
         <t id="1021021">Queen's City</t>
@@ -343,6 +343,7 @@
         <t id="1021719">Bright Profit</t>
         <t id="1021720">Priest Refuge</t>
         <t id="1021721">Magrathea</t>
+        <t id="1021803">Rhonkar's Clouds</t>
         <t id="1021804">Thuruk's Beard</t>
         <t id="1021805">Xenon Sector 534</t>
         <t id="1021807">Horizon</t>
@@ -384,6 +385,7 @@
         <t id="1022017">Company Pride</t>
         <t id="1022018">Ianamus Zura</t>
         <t id="1022019">Y Alpha</t>
+        <t id="1020000">Unknown Sector</t>
     </page>
     <page descr="Sector descriptions for galaxy map" id="350019" title="Sector Descriptions WIP" voice="no">
         <t id="1030101">Kho's Vengeance</t>
@@ -540,7 +542,7 @@
         <t id="1031014">Tharka's Sun</t>
         <t id="1031015">Vantera</t>
         <t id="1031016">Aurora</t>
-        <t id="1031018">Vestibule of Creation</t>
+        <t id="1031018">Prophecy Fulfilled</t>
         <t id="1031019">Green Market</t>
         <t id="1031020">Open Space</t>
         <t id="1031021">Queen's City</t>
@@ -679,6 +681,7 @@
         <t id="1031719">Bright Profit</t>
         <t id="1031720">Priest Refuge</t>
         <t id="1031721">Magrathea</t>
+        <t id="1031803">Rhonkar's Clouds</t>
         <t id="1031804">Thuruk's Beard</t>
         <t id="1031805">Xenon Sector 534</t>
         <t id="1031807">Horizon</t>
