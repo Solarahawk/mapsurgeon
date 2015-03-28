@@ -1,13 +1,77 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import os
+from ConfigParser import SafeConfigParser
 import argparse
 import xml.etree.cElementTree as ET
-import pandas
+import pandas as pd
 from xml.dom import minidom
 
-INPUT_PATH = "input/"
-OUTPUT_ROOT = "output_package/addons/"
-MAP_PATH = "maps/"
+# excel worksheets to load files from
+REMAP_SHEET = "export_schema"
+
+parser = SafeConfigParser()
+found_config = parser.read('mapsurgeon.ini')
+if not found_config:
+    print "Unable to read 'mapsurgeon.ini'. Now exiting. Please verify the config file is present and readable."
+    quit()
+
+if parser.has_section('paths'):
+    if parser.has_option('paths', 'input_path'):
+        INPUT_PATH = parser.get('paths', 'input_path')
+    else:
+        print "Configuration error: the mapsurgeon.ini file is missing the 'input_path' setting. Please fix or restore the settings and try again."
+        quit()
+
+    if parser.has_option('paths', 'output_root'):
+        OUTPUT_ROOT = parser.get('paths', 'output_root')
+    else:
+        print "Configuration error: the mapsurgeon.ini file is missing the 'output_root' setting. Please fix or restore the settings and try again."
+        quit()
+
+    if parser.has_option('paths', 'map_path'):
+        MAP_PATH = parser.get('paths', 'map_path')
+    else:
+        print "Configuration error: the mapsurgeon.ini file is missing the 'map_path' setting. Please fix or restore the settings and try again."
+        quit()
+else:
+    print "Configuration error: the mapsurgeon.ini file is missing the [paths] section. Please fix or restore the settings and try again."
+    quit()
+
+if parser.has_section('filenames'):
+    if parser.has_option('filenames', 'source_map'):
+        SOURCE_MAP = parser.get('filenames', 'source_map')
+    else:
+        print "Configuration error: the mapsurgeon.ini file is missing the 'source_map' setting. Please fix or restore the settings and try again."
+        quit()
+
+    if parser.has_option('filenames', 'output_map'):
+        OUTPUT_MAP = parser.get('filenames', 'output_map')
+    else:
+        print "Configuration error: the mapsurgeon.ini file is missing the 'output_map' setting. Please fix or restore the settings and try again."
+        quit()
+
+    if parser.has_option('filenames', 'remap_schema'):
+        REMAP_SCHEMA = parser.get('filenames', 'remap_schema')
+    else:
+        print "Configuration error: the mapsurgeon.ini file is missing the 'remap_schema' setting. Please fix or restore the settings and try again."
+        quit()
+
+    if parser.has_option('filenames', 'new_sectors'):
+        NEW_SECTORS = parser.get('filenames', 'new_sectors')
+    else:
+        print "Configuration error: the mapsurgeon.ini file is missing the 'new_sectors' setting. Please fix or restore the settings and try again."
+        quit()
+ 
+    if parser.has_option('filenames', 'gate_schema'):
+        GATE_SCHEMA = parser.get('filenames', 'gate_schema')
+    else:
+        print "Configuration error: the mapsurgeon.ini file is missing the 'gate_schema' setting. Please fix or restore the settings and try again."
+        quit()
+else:
+    print "Configuration error: the mapsurgeon.ini file is missing the [filenames] section. Please fix or restore the settings and try again."
+    quit()
+
 
 
 def prettify(elem):
@@ -65,7 +129,7 @@ def export_sorted_map(tree):
 
     # write map_export to disk
     print "Saving the new map to disk..."
-    with open(OUTPUT_ROOT + MAP_PATH + "x3_universe.xml", 'w') as f:
+    with open(os.path.join(OUTPUT_ROOT, MAP_PATH, OUTPUT_MAP), 'w') as f:
         f.write(prettify(map_export))
     f.close()
 
@@ -80,30 +144,53 @@ def export_sorted_map(tree):
 
 parser = argparse.ArgumentParser(description="This utility generates a new X3 universe map using the sector and gate network schema input files.")
 parser.add_argument("--version", action='version', version='%(prog)s 1.0')
-parser.add_argument("--inputmap", default="x3_universe.xml", help="Input file name for original map.")
-parser.add_argument("--inputschema", default="remap_schema.csv", help="Input file name for remap schema.")
-parser.add_argument("--inputnewsectors", default="newsectors.xml", help="Input file name for new sectors schema.")
-parser.add_argument("--inputgates", default="gate_schema.xml", help="Input file name for new gate schema.")
 parser.add_argument("-g", "--usegateschema", help="Use a Gate Schema for gate placement? (0 or 1)", required=True)
+
+parser.add_argument("--inputmap", default=SOURCE_MAP, help="Input file name for original map. (Default: " + SOURCE_MAP + ")")
+parser.add_argument("--inputschema", default=REMAP_SCHEMA, help="Input file name for remap schema. (Default: " + REMAP_SCHEMA + ")")
+parser.add_argument("--inputnewsectors", default=NEW_SECTORS, help="Input file name for new sectors schema. (Default: " + NEW_SECTORS + ")")
+parser.add_argument("--inputgates", default=GATE_SCHEMA, help="Input file name for new gate schema. (Default: " + GATE_SCHEMA + ")")
+parser.add_argument("--outputmap", default=OUTPUT_MAP, help="Output file name for new map. (Default: " + OUTPUT_MAP + ")")
 args = parser.parse_args()
 
-print "Map Surgeon: Loading source map: " + INPUT_PATH + args.inputmap
+# Verify input files exist
+if not os.path.exists(os.path.join(INPUT_PATH, args.inputmap)):
+    print "Source Map,", os.path.join(INPUT_PATH, args.inputmap), "does not exist. Unable to proceed."
+    quit()
+if not os.path.exists(os.path.join(INPUT_PATH, args.inputschema)):
+    print "Remap Schema,", os.path.join(INPUT_PATH, args.inputschema), "does not exist. Unable to proceed."
+    quit()
+if not os.path.exists(os.path.join(INPUT_PATH, args.inputnewsectors)):
+    print "New sectors schema,", os.path.join(INPUT_PATH, args.inputnewsectors), "does not exist. Unable to proceed."
+    quit()
+if not os.path.exists(os.path.join(INPUT_PATH, args.inputgates)):
+    print "Gate Schema,", os.path.join(INPUT_PATH, args.inputgates), "does not exist. Unable to proceed."
+    quit()
+if not os.path.exists(os.path.join(OUTPUT_ROOT, MAP_PATH)):
+    print "Output Map save path,", os.path.join(OUTPUT_ROOT, MAP_PATH), "does not exist. Unable to proceed."
+    quit()
+
+
+print "Map Surgeon: Loading source map: " + os.path.join(INPUT_PATH, args.inputmap)
 
 # Load original universe map via Element Tree 
-map_tree = ET.parse(INPUT_PATH + args.inputmap)
+map_tree = ET.parse(os.path.join(INPUT_PATH, args.inputmap))
 map_root = map_tree.getroot()
 
-print "Loading Remap Schema: " + INPUT_PATH + args.inputschema
+print "Loading Remap Schema: " + os.path.join(INPUT_PATH, args.inputschema)
 
 # Load map schema table from CSV into a pandas DataFrame (powerful associative table)
-map_schema = pandas.read_csv(INPUT_PATH + args.inputschema)
+map_schema = pd.read_excel(os.path.join(INPUT_PATH, args.inputschema), REMAP_SHEET, header=0, index_col=None)
 map_schema.sort_index(inplace=True)
+
+# remove empty rows
+map_schema.dropna(inplace=True, how='all')
 
 # Load gate network schema file, if provided
 if int(args.usegateschema) == 1:
-    print "Gate Schema has been provided. It will direct the locations of all new gates: " + INPUT_PATH + args.inputgates
+    print "Gate Schema has been provided. It will direct the locations of all new gates: ", os.path.join(INPUT_PATH, args.inputgates)
     gates_default = False   # flag to indicate whether default gate attributes, instead of the gate schema
-    gate_schema_tree = ET.parse(INPUT_PATH + args.inputgates)
+    gate_schema_tree = ET.parse(os.path.join(INPUT_PATH, args.inputgates))
     gate_schema_root = gate_schema_tree.getroot()
 
 else:
@@ -115,8 +202,9 @@ else:
 print "Deleting unneeded sectors..."
 del_sectors = map_schema[map_schema.action == -1]
 for index, row in del_sectors.iterrows():
-    x = row['x1']
-    y = row['y1']
+    # because Excel stores all numbers as floats, we have pass all retrieved integer values through float() and int() to convert them properly
+    x = int(float(row['x1']))
+    y = int(float(row['y1']))
     sector = map_root.find(".//o[@x='" + str(x) + "'][@y='" + str(y) + "']")
     map_root.remove(sector)
 
@@ -128,23 +216,27 @@ for sector in map_root.findall('o'):
 
     # lookup current sector in map schema
     sector_schema = map_schema.query('x1 == ' + x1 + ' & y1 == ' + y1)
-    sector.set('x', str(sector_schema.iloc[0]['x2']))
-    sector.set('y', str(sector_schema.iloc[0]['y2']))
+    current_sector_x = int(float(sector_schema.iloc[0]['x2']))
+    current_sector_y = int(float(sector_schema.iloc[0]['y2']))
+
+    sector.set('x', str(current_sector_x))
+    sector.set('y', str(current_sector_y))
 
     # Loop through gate positions (N, S, W, E) and update gates according to map schema
     gate_position = {0: 'gate_n', 1: 'gate_s', 2: 'gate_w', 3: 'gate_e'}
     for gid in gate_position:
         gate = sector.find(".//o[@t='18'][@gid='" + str(gid) + "']")
-        
+        gate_here = int(float(sector_schema.iloc[0][gate_position[gid]]))
+
         if gate is not None:  # There is a gate here
             # check if map schema specifies a gate to be here
-            if sector_schema.iloc[0][gate_position[gid]] == 0:  # No: Remove this gate
+            if gate_here == 0:  # No: Remove this gate
                 sector.remove(gate)
 
             else: #YES: Keep this gate and update coordinates, if needed
                 if not gates_default:   # we have a gate schema to verify/update this gate (otherwise move on)
                     # Lookup current sector in map schema
-                    lookup_sector = gate_schema_root.find(".//o[@x='" + str(sector_schema.iloc[0]['x2']) + "'][@y='" + str(sector_schema.iloc[0]['y2']) + "']")
+                    lookup_sector = gate_schema_root.find(".//o[@x='" + str(current_sector_x) + "'][@y='" + str(current_sector_y) + "']")
 
                     # then find this gate schema
                     lookup_gate = lookup_sector.find(".//o[@t='18'][@gid='" + str(gid) + "']")
@@ -154,44 +246,45 @@ for sector in map_root.findall('o'):
 
 
         else:  # There is no gate here
-            if sector_schema.iloc[0][gate_position[gid]] == 1:  # Yes: Add a gate here
+            if gate_here == 1:  # Yes: Add a gate here
                 if gates_default:  # we don't have a gate schema, so just apply default attributes
                     # First, get the sector size. This will be used to set the position of the gate at the edge of the sector
                     sector_size = sector.get('size')
-
                     if gid == 0:
-                        gate_attrib = {"f" : "1", "t": "18", "s": "0", "x": "0", "y": "0", "z": sector_size, "gid": "0", "gx": str(sector_schema.iloc[0]['x2']), "gy": str(sector_schema.iloc[0]['y2'] + 1), "gtid": "1", "a": "0", "b": "0", "g": "0"}
+                        gate_attrib = {"f" : "1", "t": "18", "s": "0", "x": "0", "y": "0", "z": sector_size, "gid": "0", "gx": str(int(float(sector_schema.iloc[0]['target_n_x']))), "gy": str(int(float(sector_schema.iloc[0]['target_n_y']))), "gtid": "1", "a": "0", "b": "0", "g": "0"}
                     elif gid == 1:
-                        gate_attrib = {"f" : "1", "t": "18", "s": "1", "x": "0", "y": "0", "z": "-" + sector_size, "gid": "1", "gx": str(sector_schema.iloc[0]['x2']), "gy": str(sector_schema.iloc[0]['y2'] - 1), "gtid": "0", "a": "32768", "b": "0", "g": "0"}
+                        gate_attrib = {"f" : "1", "t": "18", "s": "1", "x": "0", "y": "0", "z": "-" + sector_size, "gid": "1", "gx": str(int(float(sector_schema.iloc[0]['target_s_x']))), "gy": str(int(float(sector_schema.iloc[0]['target_s_y']))), "gtid": "0", "a": "32768", "b": "0", "g": "0"}
                     elif gid == 2:
-                        gate_attrib = {"f" : "1", "t": "18", "s": "2", "x": "-" + sector_size, "y": "0", "z": "0", "gid": "2", "gx": str(sector_schema.iloc[0]['x2'] - 1), "gy": str(sector_schema.iloc[0]['y2']), "gtid": "3", "a": "16384", "b": "0", "g": "0"}
+                        gate_attrib = {"f" : "1", "t": "18", "s": "2", "x": "-" + sector_size, "y": "0", "z": "0", "gid": "2", "gx": str(int(float(sector_schema.iloc[0]['target_w_x']))), "gy": str(int(float(sector_schema.iloc[0]['target_w_y']))), "gtid": "3", "a": "16384", "b": "0", "g": "0"}
                     else:
-                        gate_attrib = {"f" : "1", "t": "18", "s": "3", "x": sector_size, "y": "0", "z": "0", "gid": "3", "gx": str(sector_schema.iloc[0]['x2'] + 1), "gy": str(sector_schema.iloc[0]['y2']), "gtid": "2", "a": "-16384", "b": "0", "g": "0"}
+                        gate_attrib = {"f" : "1", "t": "18", "s": "3", "x": sector_size, "y": "0", "z": "0", "gid": "3", "gx": str(int(float(sector_schema.iloc[0]['target_e_x']))), "gy": str(int(float(sector_schema.iloc[0]['target_e_y']))), "gtid": "2", "a": "-16384", "b": "0", "g": "0"}
 
                     # append gate to current sector
                     ET.SubElement(sector, 'o', gate_attrib)  
 
                 else: # use gate schema
                     # find current sector in gate schema
-                    lookup_sector = gate_schema_root.find(".//o[@x='" + str(sector_schema.iloc[0]['x2']) + "'][@y='" + str(sector_schema.iloc[0]['y2']) + "']")
+                    lookup_sector = gate_schema_root.find(".//o[@x='" + str(current_sector_x) + "'][@y='" + str(current_sector_y) + "']")
 
                     # then find this gate element
+                    #print ".//o[@t='18'][@gid='" + str(int(float(gid))) + "']"
                     lookup_gate = lookup_sector.find(".//o[@t='18'][@gid='" + str(gid) + "']")
 
                     # and append gate to current sector
                     ET.SubElement(sector, 'o', lookup_gate.attrib)
 
+
 # Finally, load new sectors data and append to map
-print "Adding new sectors: " + INPUT_PATH + args.inputnewsectors
-newsectors_tree = ET.parse(INPUT_PATH + args.inputnewsectors)
+print "Adding new sectors: ", os.path.join(INPUT_PATH, args.inputnewsectors)
+newsectors_tree = ET.parse(os.path.join(INPUT_PATH, args.inputnewsectors))
 newsectors_root = newsectors_tree.getroot()
 
 # Loop through sectors flagged in map schema for addition and find each sector
 # in the new sector tree and append itand its children to the map
 add_sectors = map_schema[map_schema.action == 1]
 for index, row in add_sectors.iterrows():
-    x = row['x2']
-    y = row['y2']
+    x = int(float(row['x2']))
+    y = int(float(row['y2']))
     newsector = newsectors_root.find(".//o[@x='" + str(x) + "'][@y='" + str(y) + "']")
 
     newsector_out = ET.SubElement(map_root, 'o', newsector.attrib)
