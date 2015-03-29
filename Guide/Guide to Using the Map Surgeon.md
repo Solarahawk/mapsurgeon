@@ -59,3 +59,15 @@ Use *gen_newsectors.py* and *gen_gateschema.py* to extract the new sectors and g
 
 Use *remap_cli.py* to generate the redesigned galaxy map, *gen_jobs.py* for the Jobs file, and *gen_readtext.py* for the ReadText file. Once these files have been generated, you will need to load them into the game for validation--to make sure everything was converted correctly.
 
+###6. Generating a new objects\cut\00749.bod file
+
+The 00749.bod file contains the animation data used by X3 to display the galaxy map in-game. Until you generate a new version of this file and restart your game, the in-game galaxy map will not display the sectors or gate connections correctly. Fortunately, Litcube has written a script that can generate the data for this file. It is included in Litcube's Universe and is available for vanilla X3 through the forums: [Litcube's Flat Map Script](http://forum.egosoft.com/viewtopic.php?t=261078).
+
+In LU, the script is named "Z.Make00749Bod.xml", and in the standalone script package, "Lib.Debug.Make00749Bod.xml". Highlight the script in the in-game script editor, and press 'r' to run. Press 'Enter' twice to accept the default arguments and wait. If you have Subtitles enabled, you will see a progress report at the bottom of the screen. Once the export has completed, quit the game and browse to 'My Documents\Egosoft\X3AP' and locate the 8112.log file. Rename the log file to '00749.bod' and copy it to '<X3 game folder>\objects\cut'.
+
+So long as your new map doesn't have any errors (like bad gate connections), the in-game galaxy map will now display your new map correctly.
+
+
+
+
+
