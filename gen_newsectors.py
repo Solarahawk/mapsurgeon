@@ -70,6 +70,7 @@ if not os.path.exists(os.path.join(INPUT_PATH, args.inputschema)):
     print "Input Remap Schema,", os.path.join(INPUT_PATH, args.inputschema), "does not exist. Unable to proceed."
     quit()
 
+print "New Sectors Schema Generator: Loading reference map containing all remapped sectors."
 
 # Load reference map via Element Tree 
 map_tree = ET.parse(os.path.join(INPUT_PATH, args.referencemap))
@@ -95,7 +96,11 @@ for index, row in add_sectors.iterrows():
     for child in sector:
         ET.SubElement(sector_out, 'o', child.attrib)
 
+print "Saving new sectors schema to disk."
+
 # Output XML to disk
 with open(os.path.join(INPUT_PATH, args.sectorsout), 'w') as f:
     f.write(prettify(schema_export))
 f.close()
+
+print "\nNew Sectors Schema XML saved to disk."

@@ -67,6 +67,7 @@ if not os.path.exists(os.path.join(INPUT_PATH, args.referencemap)):
     print "Input Reference Map,", os.path.join(INPUT_PATH, args.referencemap), "does not exist. Unable to proceed."
     quit()
 
+print "Gate Schema Generator: Loading reference map containing all remapped sectors."
 
 # Load reference map via Element Tree 
 map_tree = ET.parse(os.path.join(INPUT_PATH, args.referencemap))
@@ -82,8 +83,11 @@ for sector in map_root.findall('o'):
     for gate in sector.findall(".//o[@t='18']"):
         gate_out = ET.SubElement(sector_out, 'o', gate.attrib)
 
+print "Saving gate schema to disk."
+
 # Output XML to disk
 with open(os.path.join(INPUT_PATH, args.gatesout), 'w') as f:
     f.write(prettify(schema_export))
 f.close()
 
+print "\nGate Schema XML saved to disk. \n\nWhen running remap_cli.py, use the '-g 1' argument to implement gates using this schema."

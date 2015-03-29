@@ -14,6 +14,12 @@ All the tools will provide basic help on the arguments they accept to configure 
 
     python <toolname>.py -h
 
+### Configuration Settings
+
+All input and output paths and filenames can be set via the configuration settings, *mapsurgeon.ini*. All paths and filenames used in this Readme document are based on the default values set in the included ini file.
+
+However, you might find it useful to change the output root directory used for saving the mod files by pointing it to the root directory of your X3 game installation. By pointing 'output_root' to that location, Map Surgeon will automatically save the generated map files in the game directory, aviding the extra step of copying the files in order to load them in the game.
+
 
 ### Input files
 
