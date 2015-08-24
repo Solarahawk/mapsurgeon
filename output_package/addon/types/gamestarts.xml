@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<gamestarts>
+  <!-- Bitmask
+     1 =
+     2 = Terran plot completed
+     4 = Fight Rank 3,333 reached
+     8 = Trade Rank 3,333 reached
+    16 = Fight Rank 100,000 reached
+    32 = Trade Rank 100,000 reached
+    64 = Goner Plot Complete
+   128 = Tormented Teladi Completed
+   256 = HUB plot completed
+   512 = Argon Rank 10,000
+  1024 = Boron Rank 10,000
+  2048 = Split Rank 10,000
+  4096 = Paranid Rank 10,000
+  8192 = Teladi Rank 10,000
+ 16384 = Argon Rank 333
+ 32768 =
+ 65536 =-->
+  
+  <!-- Damyath Ultralight -->
+  <gamestart id="101" name="Damyath Ultralight" description="New to this Universe, you were sent here to assist this struggling corner of the galaxy in the upcoming conflicts." difficulty="M5" image="start88" plot="0">
+    <player name="Litcube" species="{1900,2401}" gender="{1900,1304}" age="19"/>
+    <!-- Argon Prime -->
+    <sector x="7" y="7"/>
+    <ship typename="SS_SH_P_M5_1" comment="Pegasus Raider"/>
+  </gamestart>
+
+  <!-- Damyath Light -->
+  <gamestart id="102" name="Damyath Light" description="New to this Universe, you were sent here to assist this struggling corner of the galaxy in the upcoming conflicts." difficulty="M4" image="start88" plot="0">
+    <player name="Litcube" species="{1900,2401}" gender="{1900,1304}" age="26"/>
+    <!-- Argon Prime -->
+    <sector x="7" y="7"/>
+    <ship typename="SS_SH_T_M4_2" comment="Buzzard Vanguard"/>
+  </gamestart>
+
+  <!-- Damyath Medium -->
+  <gamestart id="103" name="Damyath Medium" description="New to this Universe, you were sent here to assist this struggling corner of the galaxy in the upcoming conflicts." difficulty="M4 + 4 x M5" image="start88" plot="0">
+    <player name="Litcube" species="{1900,2401}" gender="{1900,1304}" age="41"/>
+    <!-- Argon Prime -->
+    <sector x="7" y="7"/>
+    <ship typename="SS_SH_P_M4_2" comment="Pericles Vanguard"/>
+  </gamestart>
+
+  <!-- Damyath Advanced -->
+  <gamestart id="104" name="Damyath Advanced" description="New to this Universe, you were sent here to assist this struggling corner of the galaxy in the upcoming conflicts." difficulty="M3 + 6 x M5" image="start88" plot="0">
+    <player name="Litcube" species="{1900,2401}" gender="{1900,1304}" age="52"/>
+    <!-- Argon Prime -->
+    <sector x="7" y="7"/>
+    <ship typename="SS_SH_S_M3_ADV" comment="Mamba Advanced"/>
+  </gamestart>
+
+  <!-- Damyath Trader -->
+  <gamestart id="105" name="Damyath Trader" description="New to this Universe, you were sent here to assist this struggling corner of the galaxy in the upcoming conflicts." difficulty="TS + 3 x M5" image="start88" plot="0">
+    <player name="Litcube" species="{1900,2401}" gender="{1900,1304}" age="64"/>
+    <!-- Argon Prime -->
+    <sector x="7" y="7"/>
+    <ship typename="SS_SH_S_TS_2" comment="Caiman Advanced"/>
+  </gamestart>
+
+  <!-- Damyath Import -->
+  <gamestart id="106" name="Damyath Import" description="Import a previously exported Litcube's Universe game." difficulty="None" image="start88" plot="0">
+    <player name="Litcube" species="{1900,2401}" gender="{1900,1304}" age="1"/>
+    <!-- Argon Prime -->
+    <sector x="7" y="7"/>
+    <ship typename="SS_SH_A_M5"/>
+  </gamestart>
+
+</gamestarts>

@@ -107,30 +107,31 @@ def export_sorted_map(tree):
     # insert the last item from each tuple
     root[:] = [item[-1] for item in data]
 
-    print "Reformatting sector entries in XML..."
+#    print "Reformatting sector entries in XML..."
     # now iterate through sorted sectors and append to map_export tree
     # we export map elements in the following order to reorder the new gates
     # which were appended to the end of the sector element. This
     # places them back in front of the other sector objects, behind the sector
     # background settings.
-    for sector in root:
-        sector_out = ET.SubElement(map_export, 'o', sector.attrib)
-        for background in sector.findall(".//o[@t='2']"):
-            ET.SubElement(sector_out, 'o', background.attrib)
-            # Remove elements from original sector so we later we can easily copy remaining children
-            sector.remove(background)
+#    for sector in root:
+#        sector_out = ET.SubElement(map_export, 'o', sector.attrib)
+#        for background in sector.findall(".//o[@t='2']"):
+#            ET.SubElement(sector_out, 'o', background.attrib)
+#            # Remove elements from original sector so we later we can easily copy remaining children
+#            sector.remove(background)
 
-        for gate in sector.findall(".//o[@t='18']"):
-            ET.SubElement(sector_out, 'o', gate.attrib)
-            sector.remove(gate)
+#        for gate in sector.findall(".//o[@t='18']"):
+#            ET.SubElement(sector_out, 'o', gate.attrib)
+#            sector.remove(gate)
 
-        for child in sector:
-            ET.SubElement(sector_out, 'o', child.attrib)
+#        for child in sector:
+#            allchildren = list(child.iter())
+#            ET.SubElement(sector_out, allchildren)
 
     # write map_export to disk
     print "Saving the new map to disk..."
     with open(os.path.join(OUTPUT_ROOT, MAP_PATH, OUTPUT_MAP), 'w') as f:
-        f.write(prettify(map_export))
+        f.write(prettify(root))
     f.close()
 
     print "\nMap Surgeon: Done! Your new map has been saved to the Output Package folder: 'output_package\\addons\maps'.\n"

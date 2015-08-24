@@ -59,7 +59,7 @@ parser = argparse.ArgumentParser(description="This utility generates the Gate Ne
 parser.add_argument("--version", action='version', version='%(prog)s 1.0')
 parser.add_argument("-r", "--referencemap", default=REFERENCE_MAP, help="Reference map: input file name (Default: " + REFERENCE_MAP + ")")
 parser.add_argument("-s", "--inputschema", default=REMAP_SCHEMA, help="Remap schema: input file name (Default: " + REMAP_SCHEMA + ")")
-parser.add_argument("-n", "--sectorsout", default=NEW_SECTORS, help="Generate new sectors schema: output file name (Default: " + NEW_SECTORS + ")")
+parser.add_argument("-o", "--outputsectors", default=NEW_SECTORS, help="Generate new sectors schema: output file name (Default: " + NEW_SECTORS + ")")
 args = parser.parse_args()
 
 # Verify input files exist
